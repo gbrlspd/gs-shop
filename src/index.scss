@@ -2,13 +2,14 @@
 
 :root {
   --font-family: 'Open Sans', sans-serif;
-  --dark-blue: #0a1930;
+  --dark-blue: #152238;
   --light-blue: #1f93ff;
   --color-white: #fff;
   --color-dark: #333;
   --color-grey: #eee;
   --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --color-purple: #9d0191;
+  --color-blue: dodgerblue;
   --color-orange: #ff7722;
   --color-primary: #007bff;
   --color-success: #28a745;
@@ -32,7 +33,11 @@ body {
 
 section {
   width: 100%;
-  padding: 8rem 0;
+  padding: 4rem 0;
+}
+
+button {
+  font-family: var(--font-family);
 }
 
 .container {
@@ -417,9 +422,4 @@ a {
   color: var(--dark-blue);
   text-decoration: none;
   transition: all 0.2s;
-}
-
-a:hover {
-  color: var(--color-dark);
-  font-size: 1.5rem;
 }
