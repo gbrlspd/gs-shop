@@ -33,7 +33,7 @@ const Login = () => {
   const loginWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        toast.success(`User ${result.user.displayName} successfully logged in`, { theme: 'colored' });
+        toast.success(`User ${result.user.displayName.split(' ')[0]} successfully logged in`, { theme: 'colored' });
         navigate('/');
       })
       .catch((error) => {

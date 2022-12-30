@@ -4,9 +4,12 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaBars, FaTimes, FaUser } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
 
+import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from '../../redux/features/authSlice';
 import { auth } from '../../firebase/config';
 import styles from './Header.module.scss';
+import { ShowOnLogged, HideOnLogged } from '../display/Display';
 
 /* [GSMOD] Application logo */
 const logo = (
@@ -36,6 +39,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -48,6 +52,7 @@ const Header = () => {
   const logoutUser = () => {
     signOut(auth)
       .then(() => {
+        dispatch(REMOVE_ACTIVE_USER());
         toast.info(`Logged out successfully`, { theme: 'colored' });
         navigate('/login');
       })
@@ -59,13 +64,24 @@ const Header = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUsername(user.displayName.split(' ')[0]);
-        console.log(username);
+        if (user.displayName === null) {
+          setUsername(user.email.split('@')[0]);
+        } else {
+          setUsername(user.displayName.split(' ')[0]);
+        }
+        dispatch(
+          SET_ACTIVE_USER({
+            email: user.email,
+            username: user.displayName ? user.displayName.split(' ')[0] : user.email.split('@')[0],
+            userID: user.uid,
+          })
+        );
       } else {
         setUsername('');
+        dispatch(REMOVE_ACTIVE_USER());
       }
     });
-  }, [username]);
+  }, [dispatch]);
 
   return (
     <header>
@@ -94,22 +110,23 @@ const Header = () => {
           </ul>
           <div className={styles['header-right']} onClick={hideMenu}>
             <span className={styles.links}>
-              <NavLink to='/' onClick={logoutUser}>
-                Logout
-              </NavLink>
-              <NavLink to='/login' className={activeLink}>
-                Login
-              </NavLink>
-              <a href='#' className={styles.user}>
-                <FaUser className='--mr' />
-                {username}
-              </a>
-              <NavLink to='/register' className={activeLink}>
-                Register
-              </NavLink>
-              <NavLink to='/orders' className={activeLink}>
-                Orders
-              </NavLink>
+              <ShowOnLogged>
+                <NavLink to='/' onClick={logoutUser}>
+                  Logout
+                </NavLink>
+                <a href='#' className={styles.user}>
+                  <FaUser className='--mr' />
+                  {username}
+                </a>
+                <NavLink to='/orders' className={activeLink}>
+                  Orders
+                </NavLink>
+              </ShowOnLogged>
+              <HideOnLogged>
+                <NavLink to='/login' className={activeLink}>
+                  Login
+                </NavLink>
+              </HideOnLogged>
             </span>
             {cart}
           </div>
