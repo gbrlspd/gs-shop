@@ -50,6 +50,11 @@ button {
   transition: all 0.2s;
 }
 
+.Toastify__toast-body {
+  font-size: 14px;
+  font-family: var(--font-family);
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
