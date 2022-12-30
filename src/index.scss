@@ -2,15 +2,14 @@
 
 :root {
   --font-family: 'Open Sans', sans-serif;
-  --dark-blue: #0a1930;
-  --light-blue: #1f93ff;
+  --dark-blue: #152238;
   --color-white: #fff;
   --color-dark: #333;
   --color-grey: #eee;
   --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   --color-purple: #9d0191;
+  --color-primary: #1e90ff;
   --color-orange: #ff7722;
-  --color-primary: #007bff;
   --color-success: #28a745;
   --color-danger: orangered;
 }
@@ -28,11 +27,32 @@ html {
 
 body {
   font-family: var(--font-family);
+  background-color: var(--color-grey);
 }
 
 section {
   width: 100%;
-  padding: 8rem 0;
+  padding: 4rem 0;
+}
+
+button {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 8px;
+  margin: 0 5px 0 0;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.Toastify__toast-body {
+  font-size: 14px;
+  font-family: var(--font-family);
 }
 
 .container {
@@ -264,24 +284,6 @@ p {
   padding: 0 2rem;
 }
 
-.--btn {
-  font-size: 1.6rem;
-  font-weight: 400;
-  padding: 6px 8px;
-  margin: 0 5px 0 0;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s;
-}
-
-.--btn:hover {
-  transform: translateY(-2px);
-}
-
 .--btn-lg {
   padding: 8px 10px;
 }
@@ -292,7 +294,11 @@ p {
 
 .--btn-primary {
   color: #fff;
-  background: #007bff;
+  background: var(--color-primary);
+}
+
+.--btn-primary:hover {
+  background-color: #0063c0;
 }
 .--btn-secondary {
   color: #fff;
@@ -302,6 +308,10 @@ p {
 .--btn-danger {
   color: #fff;
   background: orangered;
+}
+
+.--btn-danger:hover {
+  background-color: rgb(180, 48, 0);
 }
 
 .--btn-success {
@@ -385,7 +395,7 @@ p {
   position: relative;
 }
 .--line::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 50%;
   bottom: -5px;
@@ -394,11 +404,7 @@ p {
   height: 3px;
   margin-bottom: 1rem;
   background: rgb(217, 8, 170);
-  background: linear-gradient(
-    135deg,
-    rgba(163, 1, 191, 1) 44%,
-    rgba(217, 8, 170, 1) 57%
-  );
+  background: linear-gradient(135deg, rgba(163, 1, 191, 1) 44%, rgba(217, 8, 170, 1) 57%);
 }
 
 .--list-style-none {
@@ -413,13 +419,8 @@ p {
 }
 
 a {
-  font-size: 1.4rem;
+  font-size: 14px;
   color: var(--dark-blue);
   text-decoration: none;
   transition: all 0.2s;
-}
-
-a:hover {
-  color: var(--color-dark);
-  font-size: 1.5rem;
 }
