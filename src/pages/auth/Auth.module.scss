@@ -38,6 +38,10 @@
         justify-content: space-between;
         margin: 1rem 0;
         font-weight: 600;
+        a {
+          display: flex;
+          align-items: center;
+        }
       }
 
       p {
@@ -47,16 +51,13 @@
     }
     .register {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
       margin-top: 1.5rem;
       a {
         display: flex;
         align-items: center;
       }
-    }
-    a {
-      font-weight: 600;
     }
     a:hover {
       color: var(--color-primary);

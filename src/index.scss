@@ -35,10 +35,22 @@ section {
   padding: 4rem 0;
 }
 
-button {
+a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-blue);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+p {
+  font-size: 14px !important;
+}
+
+.--btn {
   font-family: var(--font-family);
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 600;
   padding: 6px 8px;
   margin: 0 5px 0 0;
   border: 1px solid transparent;
@@ -52,6 +64,7 @@ button {
 
 .Toastify__toast-body {
   font-size: 14px;
+  font-weight: 500;
   font-family: var(--font-family);
 }
 
@@ -102,6 +115,10 @@ button {
 
 .--mh-100vh {
   min-height: 100vh;
+}
+
+.--w50 {
+  width: 50%;
 }
 
 /* Grid */
@@ -302,8 +319,12 @@ p {
 }
 .--btn-secondary {
   color: #fff;
-  border: 1px solid #fff;
-  background: transparent;
+  background: #152238;
+}
+
+.--btn-secondary:hover {
+  color: #fff;
+  background: #1b3e7a;
 }
 .--btn-danger {
   color: #fff;
@@ -316,7 +337,12 @@ p {
 
 .--btn-success {
   color: #fff;
-  background: #28a745;
+  background: #00ac28;
+}
+
+.--btn-success:hover {
+  color: #fff !important;
+  background: #007c1d;
 }
 
 /* Background */
@@ -416,11 +442,4 @@ p {
   height: 6rem;
   border: 1px solid #ccc;
   border-radius: 50%;
-}
-
-a {
-  font-size: 14px;
-  color: var(--dark-blue);
-  text-decoration: none;
-  transition: all 0.2s;
 }

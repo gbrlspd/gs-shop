@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Header, Footer } from './components';
-import { Home, Contact, Login, Register, Reset } from './pages';
+import { ShowOnAdmin } from './components/Display/Display';
+import { Home, Contact, Login, Register, Reset, Admin } from './pages';
 
 function App() {
   return (
@@ -15,6 +16,14 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/reset' element={<Reset />} />
+        <Route
+          path='/admin/*'
+          element={
+            <ShowOnAdmin>
+              <Admin />
+            </ShowOnAdmin>
+          }
+        />
       </Routes>
       <Footer />
     </BrowserRouter>
