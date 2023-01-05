@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { toast } from 'react-toastify';
+import { addDoc, collection, doc, setDoc, Timestamp } from 'firebase/firestore';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { db, storage } from '../../../firebase/config';
+import { selectProducts } from '../../../redux/features/productSlice';
 import Card from '../../Card/Card';
 import styles from './AddProduct.module.scss';
-import { addDoc, collection, Timestamp } from 'firebase/firestore';
 
 const categories = [
   { id: 1, name: 'Router' },
@@ -23,9 +26,26 @@ const initialState = {
   desc: '',
 };
 
+const detectForm = (id, f1, f2) => {
+  if (id === 'add') {
+    return f1;
+  } else {
+    return f2;
+  }
+};
+
 const AddProduct = () => {
-  const [product, setProduct] = useState({ ...initialState });
+  const { id } = useParams();
+  const products = useSelector(selectProducts);
+  const productEdit = products.find((item) => item.id === id);
+
+  const [product, setProduct] = useState(() => {
+    const newState = detectForm(id, { ...initialState }, productEdit);
+    return newState;
+  });
+
   const [uploadProgress, setUploadProgress] = useState(0);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -78,11 +98,38 @@ const AddProduct = () => {
     }
   };
 
+  const editProduct = (e) => {
+    e.preventDefault();
+    toast.loading('Processing your request...');
+    if (product.imageURL !== productEdit.imageURL) {
+      const imageRef = ref(storage, productEdit.imageURL);
+      deleteObject(imageRef);
+    }
+    try {
+      setDoc(doc(db, 'products', id), {
+        name: product.name,
+        imageURL: product.imageURL,
+        price: Number(product.price),
+        categories: product.categories,
+        brand: product.brand,
+        desc: product.desc,
+        createdAt: productEdit.createdAt,
+        editedAt: Timestamp.now().toDate(),
+      });
+      toast.dismiss();
+      toast.success('Product edited successfully', { theme: 'colored' });
+      navigate('/admin/products');
+    } catch (err) {
+      toast.dismiss();
+      toast.error(`${err}`, { theme: 'colored' });
+    }
+  };
+
   return (
     <div className={styles.product}>
-      <h2 className='--my'>Add Product</h2>
+      <h2 className='--my'>{detectForm(id, 'Add Product', 'Edit Product')}</h2>
       <Card cardClass={styles.card}>
-        <form onSubmit={addProduct}>
+        <form onSubmit={detectForm(id, addProduct, editProduct)}>
           <label>Name:</label>
           <input
             type='text'
