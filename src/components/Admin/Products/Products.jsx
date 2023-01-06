@@ -1,38 +1,20 @@
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Notiflix from 'notiflix';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { db, storage } from '../../../firebase/config';
-import styles from './Products.module.scss';
 import { deleteObject, ref } from 'firebase/storage';
-import { useDispatch } from 'react-redux';
-import { STORE_PRODUCTS } from '../../../redux/features/productSlice';
+import { selectProducts, STORE_PRODUCTS } from '../../../redux/features/productSlice';
+import useFetchCollection from '../../../customHooks/useFetchCollection';
+import styles from './Products.module.scss';
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const { data } = useFetchCollection('products');
+  const products = useSelector(selectProducts);
   const dispatch = useDispatch();
-
-  const getProducts = () => {
-    toast.loading('Processing your request...');
-    try {
-      const productsRef = collection(db, 'products');
-      const q = query(productsRef, orderBy('createdAt', 'desc'));
-      onSnapshot(q, (querySnapshot) => {
-        toast.dismiss();
-        const allProducts = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setProducts(allProducts);
-        dispatch(STORE_PRODUCTS({ products: allProducts }));
-      });
-    } catch (error) {
-      toast.dismiss();
-      toast.error(`${error.message}`, { theme: 'colored' });
-    }
-  };
 
   const confirmDelete = (id, imageURL) => {
     Notiflix.Confirm.show(
@@ -68,8 +50,8 @@ const Products = () => {
   };
 
   useEffect(() => {
-    getProducts();
-  }, []);
+    dispatch(STORE_PRODUCTS({ products: data }));
+  }, [dispatch, data]);
 
   return (
     <div className={styles.table}>

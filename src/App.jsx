@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Header, Footer } from './components';
 import { ShowOnAdmin } from './components/Display/Display';
+import ProductDetails from './components/Product/ProductDetails/ProductDetails';
 import { Home, Contact, Login, Register, Reset, Admin } from './pages';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             </ShowOnAdmin>
           }
         />
+        <Route path='/product/:id' element={<ProductDetails />} />
       </Routes>
       <Footer />
     </BrowserRouter>
