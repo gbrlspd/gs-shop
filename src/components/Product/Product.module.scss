@@ -29,12 +29,13 @@
     .filter {
       width: 50%;
       background-color: #fff;
-      border: 2px solid var(--dark-blue);
+      border: 1px solid #ccc;
       position: absolute;
       left: -200%;
       height: 100%;
       padding: 1rem;
       z-index: 99;
+      border-radius: 0 10px 0 0;
     }
     .show {
       left: 0;
