@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { FaShoppingCart, FaBars, FaTimes, FaUser } from 'react-icons/fa';
+import { FaShoppingCart, FaBars, FaTimes, FaUser, FaLock } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from '../../redux/features/authSlice';
 import { auth } from '../../firebase/config';
 import styles from './Header.module.scss';
-import { ShowOnLogged, HideOnLogged } from '../display/Display';
+import { ShowOnLogged, HideOnLogged, ShowOnAdminLink } from '../Display/Display';
 
 /* [GSMOD] Application logo */
 const logo = (
@@ -92,11 +92,21 @@ const Header = () => {
             className={showMenu ? `${styles['nav-wrapper']} ${styles['show-nav-wrapper']}` : `${styles['nav-wrapper']}`}
             onClick={hideMenu}
           ></div>
-          <ul onClick={hideMenu}>
+          <ul onClick={hideMenu} className='--flex-center'>
             <li className={styles['logo-mobile']}>
               {logo}
               <FaTimes size={28} onClick={hideMenu} />
             </li>
+            <ShowOnAdminLink>
+              <li>
+                <Link to='/admin/home'>
+                  <button className='--btn --btn-primary'>
+                    <FaLock className='--mr' />
+                    Admin
+                  </button>
+                </Link>
+              </li>
+            </ShowOnAdminLink>
             <li>
               <NavLink to='/' className={activeLink}>
                 Home
@@ -111,7 +121,7 @@ const Header = () => {
           <div className={styles['header-right']} onClick={hideMenu}>
             <span className={styles.links}>
               <ShowOnLogged>
-                <NavLink to='/' onClick={logoutUser}>
+                <NavLink to='/' onClick={logoutUser} className={styles.logout}>
                   Logout
                 </NavLink>
                 <a href='#' className={styles.user}>

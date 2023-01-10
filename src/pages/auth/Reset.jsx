@@ -7,7 +7,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth } from '../../firebase/config';
 import styles from './Auth.module.scss';
 import resetImg from '../../assets/reset.svg';
-import Card from '../../components/card/Card';
+import Card from '../../components/Card/Card';
 
 const Reset = () => {
   const [email, setEmail] = useState('');
@@ -41,13 +41,13 @@ const Reset = () => {
             <button type='submit' className='--btn --btn-primary --btn-block'>
               Reset
             </button>
-            <p className='--text-sm'>We will send you a link to reset your password</p>
           </form>
+          <p className='--my'>We will send you a link to reset your password.</p>
           <span className={styles.register}>
-            <Link to='/register'>
+            <Link to='/register' className='--btn --btn-success --w50'>
               Register now! <FaUserPlus className='--ml' size={18} />
             </Link>
-            <Link to='/login'>
+            <Link to='/login' className='--btn --btn-success --w50'>
               Login now! <FaSignInAlt className='--ml' size={18} />
             </Link>
           </span>

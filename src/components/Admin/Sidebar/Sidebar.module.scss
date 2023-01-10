@@ -1,0 +1,47 @@
+.sidebar {
+  border-right: 1px solid #ccc;
+  min-height: 100%;
+
+  .user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 4rem;
+    background-color: var(--color-primary);
+
+    h4 {
+      color: #fff;
+    }
+  }
+
+  nav ul {
+    li {
+      border-bottom: 1px solid #ccc;
+      position: relative;
+      transition: all 0.2s;
+      a {
+        display: block;
+        padding: 1rem;
+        width: 100%;
+      }
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+  }
+}
+
+.active {
+  cursor: pointer;
+}
+
+.active::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: orangered;
+}

@@ -61,7 +61,7 @@ header {
 
   .header-right {
     display: flex;
-
+    align-items: center;
     .cart a {
       display: flex;
       color: #fff;
@@ -85,6 +85,10 @@ header {
     a.user svg {
       position: relative;
       top: 1px;
+    }
+
+    .logout:hover {
+      color: var(--color-danger);
     }
 
     .links a {
@@ -134,7 +138,7 @@ header {
       }
 
       ul {
-        display: block;
+        display: block !important;
         .logo-mobile {
           display: flex;
           justify-content: space-between;

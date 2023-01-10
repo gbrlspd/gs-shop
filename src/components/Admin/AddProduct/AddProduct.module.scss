@@ -1,0 +1,56 @@
+.product {
+  .card {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+  }
+  form {
+    label {
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+    input[type='text'],
+    input[type='number'],
+    input[type='file'],
+    input[type='email'],
+    select,
+    textarea,
+    input[type='password'] {
+      display: block;
+      font-size: 14px;
+      font-weight: 300;
+      padding: 1rem;
+      margin: 1rem auto;
+      width: 100%;
+      border: 1px solid #777;
+      border-radius: 3px;
+      outline: none;
+    }
+
+    button {
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress {
+      background-color: #aaa;
+      margin-top: 1rem;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      .progress-bar {
+        background-color: var(--color-primary);
+        border: 1px solid transparent;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 500;
+        padding: 0 1rem;
+      }
+    }
+  }
+}
+
+.group {
+  padding: 5px;
+}

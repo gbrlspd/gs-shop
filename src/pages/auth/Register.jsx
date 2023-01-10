@@ -7,7 +7,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/config';
 import styles from './Auth.module.scss';
 import registerImg from '../../assets/register.svg';
-import Card from '../../components/card/Card';
+import Card from '../../components/Card/Card';
 
 const Register = () => {
   const [email, setEmail] = useState('');

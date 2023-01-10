@@ -1,10 +1,10 @@
-import React from 'react';
 import styles from './Home.module.scss';
+import Product from '../../components/Product/Product';
 
 const Home = () => {
   return (
     <div>
-      <h1>Home</h1>
+      <Product />
     </div>
   );
 };

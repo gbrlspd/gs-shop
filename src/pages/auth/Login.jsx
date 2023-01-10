@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaSignInAlt, FaGoogle, FaUserPlus } from 'react-icons/fa';
+import { FaSignInAlt, FaGoogle, FaUserPlus, FaKey } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 import { auth } from '../../firebase/config';
 import styles from './Auth.module.scss';
 import loginImg from '../../assets/login.svg';
-import Card from '../../components/card/Card';
+import Card from '../../components/Card/Card';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -63,18 +63,18 @@ const Login = () => {
             />
             <button className='--btn --btn-primary --btn-block'>Login</button>
             <div className={styles.links}>
-              <Link to='/reset'>Forget your Password?</Link>
+              <Link to='/reset'>
+                Forget your Password? <FaKey className='--ml' />
+              </Link>
             </div>
           </form>
           <button type='submit' className='--btn --btn-danger --btn-block --my' onClick={loginWithGoogle}>
             <FaGoogle className='--mr' />
             Login with Google
           </button>
-          <span className={styles.register}>
-            <Link to='/register'>
-              Register now! <FaUserPlus className='--ml' size={18} />
-            </Link>
-          </span>
+          <Link to='/register' className='--btn --btn-success --btn-block --my'>
+            Register now! <FaUserPlus className='--ml' size={18} />
+          </Link>
         </div>
       </Card>
     </section>

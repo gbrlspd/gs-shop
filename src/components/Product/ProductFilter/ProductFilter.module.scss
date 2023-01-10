@@ -1,0 +1,72 @@
+.filter {
+  width: 90%;
+  h4 {
+    margin: 1rem 0;
+  }
+  .category {
+    box-shadow: var(--box-shadow);
+    button {
+      display: block;
+      text-align: left;
+      width: 100%;
+      padding-left: 10px;
+      height: 3rem;
+      font-size: 14px;
+      border: none;
+      background-color: #fff;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    :hover {
+      background-color: #ccc;
+    }
+    :nth-child(1) {
+      border-radius: 5px 5px 0 0;
+    }
+    :nth-last-child(1) {
+      border-radius: 0 0 5px 5px;
+    }
+  }
+
+  .brand {
+    select {
+      font-size: 14px;
+      font-weight: 300;
+      padding: 5px;
+      width: 80%;
+      border: 1px solid #777;
+      border-radius: 3px;
+      outline: none;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .filter {
+    .category button {
+      width: 100%;
+    }
+    .brand {
+      select {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.active {
+  // position: relative;
+  background-color: var(--color-danger) !important;
+  padding-left: 15px !important;
+  color: #fff;
+}
+
+// .active::before {
+//   content: '';
+//   position: absolute;
+//   left: 0;
+//   bottom: -1;
+//   width: 4px;
+//   height: 60%;
+//   background-color: var(--color-danger);
+// }
