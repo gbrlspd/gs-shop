@@ -1,0 +1,22 @@
+.card {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+  border: 1px solid var(--light-blue);
+  margin-bottom: 10px;
+  b {
+    color: var(--color-success);
+  }
+}
+h3 {
+  font-weight: 300;
+}
+
+.text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h3 {
+    color: var(--color-success);
+  }
+}

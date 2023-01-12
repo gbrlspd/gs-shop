@@ -1,13 +1,23 @@
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { db } from '../../../firebase/config';
+import { ADD_TO_CART, DECREASE_FROM_CART, GET_QTY, selectCartItems } from '../../../redux/features/cartSlice';
 import styles from './ProductDetails.module.scss';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+
+  const item = cartItems.find((i) => i.id === id);
+
+  const isAdded = cartItems.findIndex((i) => {
+    return i.id === id;
+  });
 
   const getProduct = async () => {
     const docRef = doc(db, 'products', id);
@@ -21,6 +31,16 @@ const ProductDetails = () => {
     } else {
       toast.error('Product not found!', { theme: 'colored' });
     }
+  };
+
+  const addToCart = (product) => {
+    dispatch(ADD_TO_CART(product));
+    dispatch(GET_QTY());
+  };
+
+  const decreaseItem = (product) => {
+    dispatch(DECREASE_FROM_CART(product));
+    dispatch(GET_QTY());
   };
 
   useEffect(() => {
@@ -52,12 +72,22 @@ const ProductDetails = () => {
               <b>Brand:</b> {product.brand}
             </p>
             <div className={styles.count}>
-              <button className='--btn'>-</button>
-              <p>
-                <b>1</b>
-              </p>
-              <button className='--btn'>+</button>
-              <button className='--btn --btn-success'>Add to Cart!</button>
+              {isAdded < 0 ? null : (
+                <>
+                  <button className='--btn --btn-danger' onClick={() => decreaseItem(product)}>
+                    -
+                  </button>
+                  <p>
+                    <b>{item.cartQty}</b>
+                  </p>
+                  <button className='--btn --btn-success' onClick={() => addToCart(product)}>
+                    +
+                  </button>
+                </>
+              )}
+              <button className='--btn --btn-success' onClick={() => addToCart(product)}>
+                Add to Cart!
+              </button>
             </div>
           </div>
         </div>

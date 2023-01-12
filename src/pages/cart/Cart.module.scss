@@ -1,0 +1,75 @@
+.table {
+  min-height: 100vh;
+  padding: 5px;
+  width: 100%;
+  overflow-x: auto;
+
+  table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ccc !important;
+    font-size: 14px;
+
+    thead tr th {
+      background-color: #ccc;
+    }
+
+    .image {
+      background-color: #fff;
+      width: 100px;
+      border-radius: 5px;
+      box-shadow: var(--box-shadow);
+    }
+
+    th,
+    td {
+      vertical-align: top;
+      text-align: left;
+      padding: 8px;
+      &.icons {
+        > * {
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+    tr {
+      background-color: #eee;
+    }
+
+    tr:nth-child(even) {
+      background-color: #ccc;
+    }
+  }
+  .summary {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .card {
+      padding: 1rem;
+      margin-top: 10px;
+      .text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h3 {
+          font-weight: 600;
+          color: var(--color-success);
+        }
+      }
+      button {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+.count {
+  display: flex;
+  align-items: center;
+  & > * {
+    margin-right: 1rem;
+  }
+}
