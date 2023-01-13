@@ -8,3 +8,4 @@ export { default as Register } from './auth/Register';
 export { default as Reset } from './auth/Reset';
 export { default as CheckoutDetails } from './checkout/CheckoutDetails';
 export { default as Checkout } from './checkout/Checkout';
+export { default as CheckoutSuccess } from './checkout/CheckoutSuccess';

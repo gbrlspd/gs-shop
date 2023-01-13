@@ -19,6 +19,10 @@
     width: 100%;
     display: flex;
 
+    button {
+      margin-top: 20px;
+    }
+
     div {
       width: 100%;
     }
@@ -41,6 +45,10 @@
       border-radius: 3px;
       outline: none;
     }
+  }
+
+  .summary {
+    margin: 10px 0;
   }
 }
 

@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Header, Footer } from './components';
 import { ShowOnAdmin } from './components/Display/Display';
 import ProductDetails from './components/Product/ProductDetails/ProductDetails';
-import { Home, Contact, Login, Register, Reset, Admin, Cart, CheckoutDetails, Checkout } from './pages';
+import { Home, Contact, Login, Register, Reset, Admin, Cart, CheckoutDetails, Checkout, CheckoutSuccess } from './pages';
 
 function App() {
   return (
@@ -29,6 +29,7 @@ function App() {
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout-details' element={<CheckoutDetails />} />
         <Route path='/checkout' element={<Checkout />} />
+        <Route path='/checkout-success' element={<CheckoutSuccess />} />
       </Routes>
       <Footer />
     </BrowserRouter>

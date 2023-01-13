@@ -26,7 +26,7 @@ const CheckoutSummary = () => {
             <Card cardClass={styles.card} key={index}>
               <h4>{item.name}</h4>
               <p>
-                Quantity: <b style={{ color: '#000' }}>{item.cartQty}</b>
+                Quantity: <b style={{ color: '#333' }}>{item.cartQty}</b>
               </p>
               <p>
                 Unit Price: <b>${item.price}</b>
