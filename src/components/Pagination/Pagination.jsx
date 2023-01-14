@@ -6,7 +6,7 @@ const Pagination = ({ currentPage, setCurrentPage, productsPerPage, totalProduct
   const totalPages = totalProducts / productsPerPage;
 
   /* Limit the numbers displayed in the pagination */
-  const [pageNumberLimit, setPageNumberLimit] = useState(5);
+  const pageNumberLimit = 5;
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
@@ -47,6 +47,7 @@ const Pagination = ({ currentPage, setCurrentPage, productsPerPage, totalProduct
             </li>
           );
         }
+        return null;
       })}
       <li
         className={currentPage === pageNumbers[pageNumbers.length - 1] ? `${styles.hidden} ${styles.text}` : styles.text}

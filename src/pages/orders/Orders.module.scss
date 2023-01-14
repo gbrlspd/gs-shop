@@ -1,0 +1,57 @@
+.table {
+  height: 100vh;
+  padding: 5px;
+  width: 100%;
+  overflow-x: auto;
+
+  table {
+    margin-top: 2rem;
+    border-collapse: collapse;
+    border: 1px solid #ccc !important;
+    width: 100%;
+    font-size: 1.4rem;
+
+    thead tr th {
+      background-color: #ccc;
+    }
+
+    tbody tr {
+      cursor: pointer;
+      &:hover {
+        background-color: #aaa;
+      }
+    }
+
+    th,
+    td {
+      vertical-align: top;
+      text-align: left;
+      padding: 8px;
+      b {
+        color: green !important;
+      }
+      &.icons {
+        > * {
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    tr {
+      border-bottom: 1px solid #ccc;
+    }
+
+    tr:nth-child(even) {
+      background-color: #ccc;
+    }
+    .pending {
+      color: orangered;
+      font-weight: 600;
+    }
+    .delivered {
+      color: green;
+      font-weight: 600;
+    }
+  }
+}

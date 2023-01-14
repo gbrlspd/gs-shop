@@ -4,7 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Header, Footer } from './components';
 import { ShowOnAdmin } from './components/Display/Display';
 import ProductDetails from './components/Product/ProductDetails/ProductDetails';
-import { Home, Contact, Login, Register, Reset, Admin } from './pages';
+import OrderDetails from './pages/orders/OrderDetails';
+import { Home, Contact, Login, Register, Reset, Admin, Cart, CheckoutDetails, Checkout, CheckoutSuccess, Orders } from './pages';
 
 function App() {
   return (
@@ -26,6 +27,12 @@ function App() {
           }
         />
         <Route path='/product/:id' element={<ProductDetails />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/checkout-details' element={<CheckoutDetails />} />
+        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/checkout-success' element={<CheckoutSuccess />} />
+        <Route path='/orders' element={<Orders />} />
+        <Route path='/order/:id' element={<OrderDetails />} />
       </Routes>
       <Footer />
     </BrowserRouter>

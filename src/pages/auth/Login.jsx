@@ -8,10 +8,13 @@ import { auth } from '../../firebase/config';
 import styles from './Auth.module.scss';
 import loginImg from '../../assets/login.svg';
 import Card from '../../components/Card/Card';
+import { useSelector } from 'react-redux';
+import { selectPreviousURL } from '../../redux/features/cartSlice';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const previousURL = useSelector(selectPreviousURL);
   const navigate = useNavigate();
 
   const loginUser = (e) => {
@@ -21,7 +24,7 @@ const Login = () => {
       .then((userCredential) => {
         toast.dismiss();
         toast.success(`E-mail ${userCredential.user.email} successfully logged in`, { theme: 'colored' });
-        navigate('/');
+        redirect();
       })
       .catch((error) => {
         toast.dismiss();
@@ -29,12 +32,20 @@ const Login = () => {
       });
   };
 
+  const redirect = () => {
+    if (previousURL.includes('cart')) {
+      return navigate('/cart');
+    } else {
+      return navigate('/');
+    }
+  };
+
   const provider = new GoogleAuthProvider();
   const loginWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         toast.success(`User ${result.user.displayName.split(' ')[0]} successfully logged in`, { theme: 'colored' });
-        navigate('/');
+        redirect();
       })
       .catch((error) => {
         toast.error(`[${error.code}] ${error.message}`, { theme: 'colored' });

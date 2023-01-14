@@ -4,12 +4,13 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaBars, FaTimes, FaUser, FaLock } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from '../../redux/features/authSlice';
 import { auth } from '../../firebase/config';
 import styles from './Header.module.scss';
 import { ShowOnLogged, HideOnLogged, ShowOnAdminLink } from '../Display/Display';
+import { GET_QTY, selectCartTotalQty } from '../../redux/features/cartSlice';
 
 /* [GSMOD] Application logo */
 const logo = (
@@ -23,23 +24,34 @@ const logo = (
   </div>
 );
 
-const cart = (
-  <span className={styles.cart}>
-    <NavLink to='/cart'>
-      Cart
-      <FaShoppingCart className='--ml' size={18} />
-      <p>0</p>
-    </NavLink>
-  </span>
-);
-
 const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : '');
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [username, setUsername] = useState('');
+  const [scrollPage, setScrollPage] = useState(false);
+  const cartTotalQty = useSelector(selectCartTotalQty);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const cart = (
+    <span className={styles.cart}>
+      <NavLink to='/cart'>
+        Cart
+        <FaShoppingCart className='--ml' size={18} />
+        <p>{cartTotalQty}</p>
+      </NavLink>
+    </span>
+  );
+
+  const fixNavbar = () => {
+    if (window.scrollY > 50) {
+      setScrollPage(true);
+    } else {
+      setScrollPage(false);
+    }
+  };
+  window.addEventListener('scroll', fixNavbar);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -60,6 +72,10 @@ const Header = () => {
         toast.error(`[${error.code}] ${error.message}`, { theme: 'colored' });
       });
   };
+
+  useEffect(() => {
+    dispatch(GET_QTY());
+  }, [dispatch]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -84,7 +100,7 @@ const Header = () => {
   }, [dispatch]);
 
   return (
-    <header>
+    <header className={scrollPage ? styles.fixed : ''}>
       <div className={styles.header}>
         {logo}
         <nav className={showMenu ? `${styles['show-nav']}` : `${styles['hide-nav']}`}>

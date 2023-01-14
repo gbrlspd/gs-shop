@@ -1,15 +1,15 @@
 .table {
-  min-height: 100vh;
+  height: 100vh;
   padding: 5px;
   width: 100%;
   overflow-x: auto;
 
   table {
-    margin-top: 20px;
+    margin-top: 2rem;
     border-collapse: collapse;
-    width: 100%;
     border: 1px solid #ccc !important;
-    font-size: 14px;
+    width: 100%;
+    font-size: 1.4rem;
 
     thead tr th {
       background-color: #ccc;
@@ -20,6 +20,12 @@
       width: 100px;
       border-radius: 5px;
       box-shadow: var(--box-shadow);
+    }
+
+    tbody tr {
+      &:hover {
+        background-color: #aaa;
+      }
     }
 
     th,
@@ -34,8 +40,9 @@
         }
       }
     }
+
     tr {
-      background-color: #eee;
+      border-bottom: 1px solid #ccc;
     }
 
     tr:nth-child(even) {
@@ -50,14 +57,12 @@
 
     .card {
       padding: 1rem;
-      margin-top: 10px;
       .text {
         display: flex;
         justify-content: space-between;
         align-items: center;
         h3 {
-          font-weight: 600;
-          color: var(--color-success);
+          color: var(--color-danger);
         }
       }
       button {
@@ -69,6 +74,9 @@
 .count {
   display: flex;
   align-items: center;
+  button {
+    border: 1px solid var(--darkblue);
+  }
   & > * {
     margin-right: 1rem;
   }
