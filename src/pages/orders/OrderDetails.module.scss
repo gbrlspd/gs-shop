@@ -15,8 +15,14 @@
       background-color: #ccc;
     }
 
+    .image {
+      background-color: #fff;
+      width: 100px;
+      border-radius: 5px;
+      box-shadow: var(--box-shadow);
+    }
+
     tbody tr {
-      cursor: pointer;
       &:hover {
         background-color: #aaa;
       }
@@ -27,9 +33,6 @@
       vertical-align: top;
       text-align: left;
       padding: 8px;
-      b {
-        color: green !important;
-      }
       &.icons {
         > * {
           margin-right: 5px;
@@ -45,13 +48,36 @@
     tr:nth-child(even) {
       background-color: #ccc;
     }
-    .pending {
-      color: orangered;
-      font-weight: 600;
+  }
+  .summary {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .card {
+      padding: 1rem;
+      .text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h3 {
+          color: var(--color-danger);
+        }
+      }
+      button {
+        margin-top: 5px;
+      }
     }
-    .delivered {
-      color: green;
-      font-weight: 600;
-    }
+  }
+}
+.count {
+  display: flex;
+  align-items: center;
+  button {
+    border: 1px solid var(--darkblue);
+  }
+  & > * {
+    margin-right: 1rem;
   }
 }

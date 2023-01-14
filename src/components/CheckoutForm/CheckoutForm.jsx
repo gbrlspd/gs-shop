@@ -1,16 +1,30 @@
 import { useEffect, useState } from 'react';
-import { PaymentElement, LinkAuthenticationElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { addDoc, collection, Timestamp } from 'firebase/firestore';
+import { db } from '../../firebase/config';
 import styles from './CheckoutForm.module.scss';
 import Card from '../Card/Card';
 import CheckoutSummary from '../CheckoutSummary/CheckoutSummary';
+import { selectEmail, selectUserID } from '../../redux/features/authSlice';
+import { CLEAR_CART, selectCartItems, selectCartTotalAmount } from '../../redux/features/cartSlice';
+import { selectShippingAddress } from '../../redux/features/checkoutSlice';
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const userID = useSelector(selectUserID);
+  const userEmail = useSelector(selectEmail);
+  const cartItems = useSelector(selectCartItems);
+  const shippingAddress = useSelector(selectShippingAddress);
+  const cartTotalAmount = useSelector(selectCartTotalAmount);
 
   useEffect(() => {
     if (!stripe) {
@@ -41,8 +55,30 @@ const CheckoutForm = () => {
     });
   }, [stripe]);
 
-  const saveOrder = () => {
-    console.log('Order saved');
+  const saveOrder = (e) => {
+    const today = new Date();
+    const date = today.toDateString();
+    const time = today.toLocaleTimeString();
+    const orderConfig = {
+      userID,
+      userEmail,
+      orderDate: date,
+      orderTime: time,
+      orderAmount: cartTotalAmount,
+      orderStatus: 'Order placed',
+      cartItems,
+      shippingAddress,
+      createdAt: Timestamp.now().toDate(),
+    };
+
+    try {
+      addDoc(collection(db, 'orders'), orderConfig);
+      dispatch(CLEAR_CART());
+      toast.info('Order in progress...', { theme: 'colored' });
+      navigate('/checkout-success');
+    } catch (err) {
+      toast.error(`${err}`, { theme: 'colored' });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -55,6 +91,7 @@ const CheckoutForm = () => {
 
     setIsLoading(true);
 
+    // eslint-disable-next-line no-unused-vars
     const confirmPayment = await stripe
       .confirmPayment({
         elements,
@@ -98,6 +135,11 @@ const CheckoutForm = () => {
           <div>
             <Card cardClass={`${styles.card} ${styles.pay}`}>
               <h3>Stripe Checkout</h3>
+              <p className='--my'>
+                <a className='--color-danger' href='https://stripe.com/docs/testing' target='_blank' rel='noreferrer'>
+                  Use the Stripe test card! Click here to check how.
+                </a>
+              </p>
               <PaymentElement id={styles['payment-element']} options={paymentElementOptions} />
               <button disabled={isLoading || !stripe || !elements} id='submit' className={styles.button}>
                 <span id='button-text'>{isLoading ? <div className={styles.spinner} id='spinner'></div> : 'Pay now'}</span>

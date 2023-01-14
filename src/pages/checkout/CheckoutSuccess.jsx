@@ -6,9 +6,11 @@ const CheckoutSuccess = () => {
       <div className='container'>
         <h2>Successful payment</h2>
         <p className='--my'>Thank you for your purchase.</p>
-        <Link>
-          <button className='--btn --btn-primary'>View Orders</button>
-        </Link>
+        <button className='--btn --btn-primary'>
+          <Link to='/orders' style={{ color: '#fff' }}>
+            View Orders
+          </Link>
+        </button>
       </div>
     </section>
   );

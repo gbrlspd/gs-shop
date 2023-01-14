@@ -37,7 +37,7 @@ app.post('/create-payment-intent', async (req, res) => {
     description,
     shipping: {
       address: {
-        line: shipping.line,
+        line1: shipping.line,
         city: shipping.city,
         country: shipping.country,
       },

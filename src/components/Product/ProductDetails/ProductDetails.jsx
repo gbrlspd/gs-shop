@@ -1,9 +1,7 @@
-import { doc, getDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { db } from '../../../firebase/config';
+import useFetchDocument from '../../../customHooks/useFetchDocument';
 import { ADD_TO_CART, DECREASE_FROM_CART, GET_QTY, selectCartItems } from '../../../redux/features/cartSlice';
 import styles from './ProductDetails.module.scss';
 
@@ -12,26 +10,13 @@ const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
+  const { document } = useFetchDocument('products', id);
 
   const item = cartItems.find((i) => i.id === id);
 
   const isAdded = cartItems.findIndex((i) => {
     return i.id === id;
   });
-
-  const getProduct = async () => {
-    const docRef = doc(db, 'products', id);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      const result = {
-        id: id,
-        ...docSnap.data(),
-      };
-      setProduct(result);
-    } else {
-      toast.error('Product not found!', { theme: 'colored' });
-    }
-  };
 
   const addToCart = (product) => {
     dispatch(ADD_TO_CART(product));
@@ -44,9 +29,8 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    getProduct();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setProduct(document);
+  }, [document]);
 
   return (
     <section>

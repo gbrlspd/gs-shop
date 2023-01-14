@@ -43,6 +43,9 @@ const CheckoutDetails = () => {
     <section>
       <div className={`container ${styles.checkout}`}>
         <h2>Checkout Details</h2>
+        <p className='--my --color-danger'>
+          <b>No validation is being done, so you can type anything.</b>
+        </p>
         <form onSubmit={handleSubmit}>
           <div>
             <Card cardClass={styles.card}>

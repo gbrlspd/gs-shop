@@ -48,8 +48,7 @@ const Checkout = () => {
       .catch((error) => {
         toast.error(error, { theme: 'colored' });
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [billingAddress, cartItems, customerEmail, description, shippingAddress]);
 
   const appearance = {
     theme: 'stripe',
