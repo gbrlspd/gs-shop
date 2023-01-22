@@ -1,6 +1,8 @@
 # Take a look at the Demo!
 
-Soon...
+## https://gs-shop.onrender.com
+
+If you have any issue with the application just let me know.
 
 # Implementation Instructions
 

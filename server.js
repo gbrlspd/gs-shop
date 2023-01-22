@@ -1,11 +1,19 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SK);
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
+}
 
 app.get('/', (req, res) => {
   res.send('Welcome!');

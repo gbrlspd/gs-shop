@@ -26,7 +26,7 @@ const Checkout = () => {
   }, [dispatch, cartItems]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/create-payment-intent', {
+    fetch('https://gs-shop.onrender.com/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
