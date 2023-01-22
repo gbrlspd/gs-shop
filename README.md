@@ -1,11 +1,14 @@
-# Take a look at the DEMO!
+# Take a look at the Demo!
 
 Soon...
-
-# Just a brief explanation about the gs- that precedes the name of the repository...
-
-It is as much a reference to my first and last name as it is to Generic Systems, because the repository was created with the intention that anyone with a need for such a solution and the necessary knowledge can use this project, **which has the MIT license included**, as they wish. If you have any questions about how MIT License works **[click here](https://choosealicense.com/licenses/mit)** and if they still persist, contact me.
 
 # Implementation Instructions
 
-Soon...
+- Access https://undraw.co to get the illustrations with your brand color (for free, of course)
+- Change the --color-primary in index.scss with your brand color
+- Search for "[GSMOD] Application logo" and change it with your brand name
+- Enter your Firebase project and Stripe account settings in a .env file (don't change the variable name, just its value)
+- Also replace the administrator email with your email inside the .env file
+- Enable Email/Password and Google authentication in your Firebase project settings
+
+If you need more instructions about the implementation feel free to contact me.

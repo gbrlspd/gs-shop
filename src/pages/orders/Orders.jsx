@@ -26,7 +26,7 @@ const Orders = () => {
   return (
     <section>
       <div className={`container ${styles.order}`}>
-        <h2>Orders</h2>
+        <h2 className='--my'>Orders</h2>
         <div className={styles.table}>
           {filteredOrders.length === 0 ? (
             <p>You have no orders.</p>

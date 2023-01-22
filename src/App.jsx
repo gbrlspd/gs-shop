@@ -6,6 +6,7 @@ import { ShowOnAdmin } from './components/Display/Display';
 import ProductDetails from './components/Product/ProductDetails/ProductDetails';
 import OrderDetails from './pages/orders/OrderDetails';
 import { Home, Contact, Login, Register, Reset, Admin, Cart, CheckoutDetails, Checkout, CheckoutSuccess, Orders } from './pages';
+import NotFound from './pages/notFound/NotFound';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path='/checkout-success' element={<CheckoutSuccess />} />
         <Route path='/orders' element={<Orders />} />
         <Route path='/order/:id' element={<OrderDetails />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>

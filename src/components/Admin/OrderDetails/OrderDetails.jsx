@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import useFetchDocument from '../../customHooks/useFetchDocument';
+import { useParams } from 'react-router-dom';
+import useFetchDocument from '../../../customHooks/useFetchDocument';
+import ChangeOrderStatus from '../../ChangeOrderStatus/ChangeOrderStatus';
 import styles from './OrderDetails.module.scss';
 
 const OrderDetails = () => {
@@ -14,13 +15,8 @@ const OrderDetails = () => {
 
   return (
     <section>
-      <div className={`container ${styles.table}`}>
-        <h2>Order Details</h2>
-        <button className='--btn --btn-danger --my'>
-          <Link to='/orders' className='--text-light'>
-            All Orders
-          </Link>
-        </button>
+      <div className={styles.table}>
+        <h2 className='--my'>Order Details</h2>
         {order === {} ? (
           <p>Please wait...</p>
         ) : (
@@ -71,6 +67,7 @@ const OrderDetails = () => {
             </table>
           </div>
         )}
+        <ChangeOrderStatus order={order} id={id} />
       </div>
     </section>
   );

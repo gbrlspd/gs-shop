@@ -1,0 +1,72 @@
+.contact {
+  min-height: 100vh;
+  .card {
+    padding: 1rem;
+    border: 1px solid #ccc;
+  }
+
+  .card2 {
+    padding: 2rem;
+    background-color: var(--color-primary);
+    color: #fff;
+    h3,
+    p {
+      color: #fff;
+    }
+    .icons {
+      margin: 3rem 0;
+      span {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 1rem;
+        p {
+          margin-left: 10px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .section {
+    display: flex;
+    align-items: flex-start;
+
+    form {
+      width: 500px;
+      max-width: 100%;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+      label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      input[type='text'],
+      input[type='number'],
+      input[type='file'],
+      input[type='email'],
+      select,
+      textarea,
+      input[type='password'] {
+        display: block;
+        font-size: 14px;
+        font-weight: 300;
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 100%;
+        border: 1px solid #777;
+        border-radius: 3px;
+        outline: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .contact {
+    .section {
+      flex-direction: column;
+    }
+  }
+}
