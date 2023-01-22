@@ -1,6 +1,6 @@
 # Take a look at the Demo!
 
-## https://gs-shop.onrender.com
+https://gs-shop.onrender.com | _Offline for now_
 
 If you have any issue with the application just let me know.
 
