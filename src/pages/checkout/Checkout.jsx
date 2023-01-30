@@ -26,7 +26,7 @@ const Checkout = () => {
   }, [dispatch, cartItems]);
 
   useEffect(() => {
-    fetch('https://gs-shop.onrender.com/create-payment-intent', {
+    fetch('https://gs-shop.herokuapp.com/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
